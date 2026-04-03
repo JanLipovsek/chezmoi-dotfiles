@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export DEBIAN_FRONTEND=noninteractive
+
+sudo apt-get update
+
+packages=(
+  zsh
+  git
+  curl
+  wget
+  unzip
+  zip
+  build-essential
+  pkg-config
+  software-properties-common
+  ca-certificates
+  gnupg
+  lsb-release
+
+  neovim
+  kitty
+  fastfetch
+  fzf
+  zoxide
+  btop
+  cava
+  rofi
+
+  ripgrep
+  fd-find
+  bat
+  eza
+
+  python3
+  python3-pip
+  python3-venv
+
+  nodejs
+  npm
+
+  cargo
+)
+
+sudo apt-get install -y "${packages[@]}"
+
+# Ubuntu package names vs command names
+if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
+  mkdir -p "$HOME/.local/bin"
+  ln -sf "$(command -v fdfind)" "$HOME/.local/bin/fd"
+fi
+
+if ! command -v bat >/dev/null 2>&1 && command -v batcat >/dev/null 2>&1; then
+  mkdir -p "$HOME/.local/bin"
+  ln -sf "$(command -v batcat)" "$HOME/.local/bin/bat"
+fi

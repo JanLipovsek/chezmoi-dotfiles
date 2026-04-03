@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v pokemon-colorscripts >/dev/null 2>&1; then
+  exit 0
+fi
+
+if command -v go >/dev/null 2>&1; then
+  GOBIN="${HOME}/.local/bin" go install github.com/whalecrow/pokemon-colorscripts/cmd/pokemon-colorscripts@latest
+fi
